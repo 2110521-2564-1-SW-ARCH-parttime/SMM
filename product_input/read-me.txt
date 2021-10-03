@@ -1,0 +1,3 @@
+[how to run]
+step1: npm i -g serve
+step2: serve -s dist
