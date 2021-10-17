@@ -1,0 +1,16 @@
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-12 text-center">
+            
+            {% if login %}
+            <META HTTP-EQUIV="Refresh" CONTENT="0;URL=https://web.facebook.com/">
+            {% else %}
+            <p>Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
+

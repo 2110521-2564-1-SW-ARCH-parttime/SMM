@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SMM - Home Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="static/css/main.css"/>
+</head>
+<body>
+
+<div class="container">
+    
+    <div>
+        <table cellspacing="20">
+            <tr>
+              <td><img src="static/images/logo.png" height=250px></td>
+              <td>
+                <h1>Welcome to Social Marketing Platform</h1>
+                <h4>power by Technos</h4>
+              </td>
+            </tr>
+          </table>
+    </div>
+    <div>
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+
+</div>
+    {% include "includes/footer.html" %}
+</body>
+</html>
