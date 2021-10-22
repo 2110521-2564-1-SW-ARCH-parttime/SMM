@@ -4,11 +4,12 @@
 {% block content %}
     <div class="row">
         <div class="col-md-12 text-center">
-            
+
             {% if login %}
-            <META HTTP-EQUIV="Refresh" CONTENT="0;URL=https://web.facebook.com/">
+            <h3>Welcome {{ name }}</h3>
             {% else %}
             <p>Already registered? <a href="{{ url_for('login') }}">Login</a></p>
+            <p>Or not <a href="{{ url_for('register') }}">Register now</a></p>
             {% endif %}
         </div>
     </div>
