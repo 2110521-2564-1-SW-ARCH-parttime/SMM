@@ -1,0 +1,27 @@
+syntax ="proto3";
+
+service ShopService {
+    rpc GetAllProduct(Empty) returns (ProductList) {}
+    rpc Get (ProductId) returns (ProductItem){}
+    rpc Insert (ProductItem) returns (ProductItem) {}
+    rpc Update (ProductItem) returns (ProductItem) {}
+    rpc Remove (ProductId) returns (Empty) {}
+}
+
+message Empty{}
+
+message ProductItem {
+    string _id=1;
+    string name=2;
+    string category=3;
+    int32 price=4;
+    string image=5;
+}
+
+message ProductList{
+    repeated ProductItem product=1;
+}
+
+message ProductId{
+    string _id=1;
+}
