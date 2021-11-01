@@ -1,0 +1,49 @@
+GET http://localhost:9000/products
+
+###
+
+GET http://localhost:3000
+
+###
+
+GET http://localhost:9000/product/4000
+###
+
+POST http://localhost:3000/updateproduct
+content-type: application/json
+
+{
+  "_id": "616ab4970b95dd2355e4570d",
+  "name": "p",
+  "category": "pants",
+  "price": 400,
+  "image": "https://i1.wp.com/sourcingjournal.com/wp-content/uploads/2020/05/levis-goldenticket.jpg"
+}
+
+###
+
+POST http://localhost:3000/removeproduct
+content-type: application/json
+
+{
+  "_id": "616ab30c0b95dd2355e4570a"
+}
+
+##
+
+# {
+#     "id": "1099",
+#     "name": "xxxxx",
+#     "category": "sql",
+#     "price": 200
+# }
+
+# {
+#   "name": "jean",
+#   "category": "pants",
+#   "price": 200,
+#   "image": "https://i1.wp.com/sourcingjournal.com/wp-content/uploads/2020/05/levis-goldenticket.jpg",
+#   "tags": ["test1", "test2", "tag1"],
+#   "shop_id": "4000",
+#   "shop_name": "Mike"
+# }
