@@ -1,5 +1,5 @@
 import re
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, render_template
 from flask_cors import CORS
 import pymongo
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -19,13 +19,18 @@ Shop = Database.shoptest02_with_owners
 @app.route("/catalog/<shop>", methods=["GET"])
 def login(shop):
     query = Shop.find({"owner":shop})
-    output = {}
+    output = []
     i = 0
     for x in query:
-        output[i] = x
+        output.append(x)
         output[i].pop('_id')
         i += 1
-    return jsonify(output)
+    # print(output)
+    return render_template("catalog.html", productData=output, shop=shop)
+
+@app.route("/cart", methods=["GET","POST"])
+def order():
+    return jsonify({"status":"ok"})
 
 if __name__ == '__main__':
     app.run(debug=True)
