@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+
+<h1>Your order</h1>
+
+<!--  Display the Term and Year here --->
+
+<div>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">Shop name</th>
+            <th scope="col">Product name</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Total cost</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <!-- Construct the rest of courses here -->
+        {% for data in session['cart_list'] %}
+        <tr>
+            <td scope='row'>{{ session['shop'] }}</td>
+            <td>{{ data["product"] }}</td>
+            <td>{{ data["amount"] }}</td>
+            <td>{{ data["cost"] }}</td>
+        </tr>
+        {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+<div>
+    <h3>Please fill your information</h3>
+    <form action="{{ url_for('sendOrder') }}" method="POST" class="form-inline">
+        <div class="form-order">
+          <label for="name">Enter your name: </label>
+          <input type="text" name="name" required>
+        </div>
+        <div class="form-order">
+          <label for="tel">Enter your phone number: </label>
+          <input type="text" name="tel" required>
+        </div>
+        <div class="form-order">
+            <label for="address">Enter your address: </label>
+            <input type="text" name="address" required>
+        </div>
+        <div>
+          <input type="submit" value="Order">
+        </div>
+      </form>
+</div>
+
+
+{% endblock %}

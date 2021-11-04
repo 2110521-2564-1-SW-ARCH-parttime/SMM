@@ -26,9 +26,11 @@
                 <td><img src="{{ data["image"] }}" alt="" class="image-catalog"></td>
                 <td>{{ data["price"] }}</td>
                 <td>
-                    <form action="{{ url_for('cart') }}" method="GET" class="form-inline">
+                    <form action="{{ url_for('cart') }}" method="POST" class="form-inline">
                         <div class="form-group">
                             <input type="hidden" name="name" value="{{data['name']}}">
+                            <input type="hidden" name="id" value="{{data['_id']}}">
+                            <input type="hidden" name="price" value="{{data['price']}}">
                             <input type="number" class="form-control" id="inputAmount" placeholder="Enter Amount" name="amount">    
                         </div>
                         <button >Add to cart</button>
@@ -36,11 +38,14 @@
                 </td>
             </tr>
             {% endfor %}
+
             <!-------------------------------------->
 
             </tbody>
         </table>
-
+    </div>
+    <div>
+        <a href="{{ url_for('order') }}"> Order now !!!</a>
     </div>
 
 {% endblock %}
