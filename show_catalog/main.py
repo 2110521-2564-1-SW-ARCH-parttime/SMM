@@ -2,7 +2,7 @@ import os
 from flask import Flask, jsonify, request, render_template, url_for, session, redirect, flash
 from flask_cors import CORS
 import pymongo
-from werkzeug.security import generate_password_hash, check_password_hash
+import pika
 
   
 # Replace your URL here. Don't forget to replace the password.
@@ -57,7 +57,31 @@ def order():
 
 @app.route("/sendOrder", methods=["GET","POST"])
 def sendOrder():
-    return "<h1> Thank you for your order </h1>"
+
+    connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
+    channel = connection.channel()
+    channel.queue_declare(queue='hello')
+
+    msg = session['shop']
+    msg = msg + "," + request.form.get('name')
+    msg = msg + "," + request.form.get('tel')
+    msg = msg + "," + request.form.get('address')
+
+    for data in session['cart_list']:
+        msg = msg + "," + data["id"]
+        msg = msg + "," + data["product"]
+        msg = msg + "," + str(data["amount"])
+        msg = msg + "," + str(data["cost"])
+
+    channel.basic_publish(exchange='',
+                        routing_key='hello',
+                        body=msg)
+
+    connection.close()
+
+    flash(msg)
+
+    return render_template("sendOrder.html")
 
 if __name__ == '__main__':
     app.run(debug=True)
