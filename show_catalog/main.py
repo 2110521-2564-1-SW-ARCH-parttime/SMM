@@ -1,5 +1,5 @@
 import os
-from flask import Flask, jsonify, request, render_template, url_for, session, redirect, flash
+from flask import Flask, jsonify, request, render_template, url_for, session, redirect, flash, json
 from flask_cors import CORS
 import pymongo
 import pika
@@ -18,7 +18,7 @@ Shop = Database.shoptest02_with_owners
 
   
 @app.route("/catalog/<shop>", methods=["GET"])
-def login(shop):
+def catalog(shop):
     query = Shop.find({"owner":shop})
     session['shop'] = shop
     output = []
@@ -61,25 +61,27 @@ def sendOrder():
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
     # channel.queue_declare(queue='order_queue')
-
-    msg = session['shop']
-    msg = msg + "," + request.form.get('name')
-    msg = msg + "," + request.form.get('tel')
-    msg = msg + "," + request.form.get('address')
-
+    
+    carts = []
     for data in session['cart_list']:
-        msg = msg + "," + data["id"]
-        msg = msg + "," + data["product"]
-        msg = msg + "," + str(data["amount"])
-        msg = msg + "," + str(data["cost"])
+        cart = {"product_id":data["id"], "name":data["product"], "amount":data["amount"], "cost":data["cost"]}
+        carts.append(cart)
+
+    msg_dict = {
+        "Store_name":session['shop']
+        , "Cart":carts
+        , "Client_information":{"name":request.form.get('name'),"telephone":request.form.get('tel'),"address":request.form.get('address')}
+    }
+
+    msg_str = json.dumps(msg_dict, indent=3)
 
     channel.basic_publish(exchange='',
                         routing_key='order_queue',
-                        body=msg)
+                        body=msg_str)
 
     connection.close()
 
-    flash(msg)
+    flash(msg_str)
 
     return render_template("sendOrder.html")
 
