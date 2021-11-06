@@ -23,11 +23,10 @@ def catalog(shop):
     session['shop'] = shop
     output = []
     i = 0
-    print(query[0])
-    # for x in query:
-    #     output.append(x)
-    #     i += 1
-    # # print(output)
+    for x in query:
+        output.append(x)
+        i += 1
+    # print(output)
     return render_template("catalog.html", productData=output, shop=shop)
 
 @app.route("/cart", methods=["GET","POST"])
@@ -61,18 +60,7 @@ def sendOrder():
 
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
-    channel.queue_declare(queue='hello')
-
-    # msg = session['shop']
-    # msg = msg + "," + request.form.get('name')
-    # msg = msg + "," + request.form.get('tel')
-    # msg = msg + "," + request.form.get('address')
-
-    # for data in session['cart_list']:
-    #     msg = msg + "," + data["id"]
-    #     msg = msg + "," + data["product"]
-    #     msg = msg + "," + str(data["amount"])
-    #     msg = msg + "," + str(data["cost"])
+    # channel.queue_declare(queue='order_queue')
     
     carts = []
     for data in session['cart_list']:
@@ -88,7 +76,7 @@ def sendOrder():
     msg_str = json.dumps(msg_dict, indent=3)
 
     channel.basic_publish(exchange='',
-                        routing_key='hello',
+                        routing_key='order_queue',
                         body=msg_str)
 
     connection.close()
