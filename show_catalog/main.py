@@ -23,10 +23,11 @@ def catalog(shop):
     session['shop'] = shop
     output = []
     i = 0
-    for x in query:
-        output.append(x)
-        i += 1
-    # print(output)
+    print(query[0])
+    # for x in query:
+    #     output.append(x)
+    #     i += 1
+    # # print(output)
     return render_template("catalog.html", productData=output, shop=shop)
 
 @app.route("/cart", methods=["GET","POST"])
@@ -97,4 +98,4 @@ def sendOrder():
     return render_template("sendOrder.html")
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=5002)
