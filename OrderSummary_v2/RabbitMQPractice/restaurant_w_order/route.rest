@@ -1,0 +1,27 @@
+POST http://localhost:3000/placeorder
+Content-Type: application/json
+
+{ 
+    "Store_name": "mike1",
+    "Cart": [
+      {
+        "product_id": "1",
+        "name":"book",
+        "amount": 5,
+        "price": 200,
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/slicker-jacket_LYNDA_29941.jpg"
+      },
+      {
+        "product_id": "2",
+        "name":"table",
+        "amount": 2,
+        "price": 300,
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/unisex-grunge-jeans_LYNDA_29937.jpg"
+      }
+    ],
+    "Client_information":{
+      "name":"anapom",
+      "telephone":"0865278961",
+      "address":"MySweetHome"
+    }
+}
