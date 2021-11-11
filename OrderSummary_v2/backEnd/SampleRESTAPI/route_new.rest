@@ -1,0 +1,42 @@
+GET http://localhost:5000/orders
+
+
+###
+get http://localhost:5000/orders/61754200245ed735d4359927
+
+###
+POST http://localhost:5000/orders
+Content-Type: application/json
+
+{
+    "products": [
+      {
+        "id": "1",
+        "text": "Thermal Fleece Jacket",
+        "price": "200",
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/slicker-jacket_LYNDA_29941.jpg",
+        "reminder": true
+      },
+      {
+        "id": "2",
+        "text": "cool Jean",
+        "price": "150",
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/unisex-grunge-jeans_LYNDA_29937.jpg",
+        "reminder": true
+      },
+      {
+        "id": "3",
+        "text": "Blue Jacket",
+        "price": "220",
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/ski-coat_LYNDA_29940.jpg",
+        "reminder": false
+      },
+      {
+        "id": 18402,
+        "text": "polo",
+        "image": "https://hplussport.com/wp-content/uploads/2016/12/polo-shirt_LYNDA_29938.jpg",
+        "price": "250"
+      }
+    ]
+}
+

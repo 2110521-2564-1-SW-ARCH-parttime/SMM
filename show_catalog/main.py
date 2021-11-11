@@ -66,7 +66,8 @@ def cancel():
 def sendOrder():
     connection = pika.BlockingConnection(pika.ConnectionParameters('localhost'))
     channel = connection.channel()
-    # channel.queue_declare(queue='hello') 
+    # channel.queue_declare(queue='order_queue')
+    
     carts = []
     for data in session['cart_list']:
         cart = {"product_id":data["id"], "name":data["product"], "amount":data["amount"], "price":data["price"]}
@@ -78,7 +79,7 @@ def sendOrder():
     }
     msg_str = json.dumps(msg_dict, indent=3)
     channel.basic_publish(exchange='',
-                        routing_key='hello',
+                        routing_key='order_queue',
                         body=msg_str)
     connection.close()
     session.pop('cart_list')
