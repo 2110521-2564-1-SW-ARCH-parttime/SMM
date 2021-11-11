@@ -2,50 +2,92 @@
 
 {% block content %}
 
-    <h1>Welcome to {{ shop }} shop</h1>
+    <h1 style="text-align: center">Welcome to {{ shop }} shop</h1>
+    <blockquote class="blockquote text-center">
+        <p class="mb-0">Social marketing platform by Technos</p>
+        
+    </blockquote>
 
-    <!--  Display the Term and Year here --->
-    <h3>Social marketing platform</h3>
+    <div class="container">
+        <div class="row">
+            <div class="col-8">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Image</th>
+                        <th scope="col">Price</th>
+                        <th scope="col">Amount</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+        
+                    <!-- Construct the rest of courses here -->
+                    {% for data in productData %}
+                    <tr>
+                        <td scope='row'>{{ data["name"] }}</td>
+                        <td><img src="{{ data["image"] }}" alt="" class="image-catalog"></td>
+                        <td>{{ data["price"] }}</td>
+                        <td>
+                            <form action="{{ url_for('cart') }}" method="POST" class="form-inline">
+                                <div class="form-group">
+                                    <input type="hidden" name="name" value="{{data['name']}}">
+                                    <input type="hidden" name="id" value="{{data['_id']}}">
+                                    <input type="hidden" name="price" value="{{data['price']}}">
+                                    <input type="number" class="form-control" id="inputAmount" placeholder="Enter Amount" name="amount">    
+                                </div>
+                                <button class="btn-submit">Add to cart</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+        
+                    <!-------------------------------------->
+        
+                    </tbody>
+                </table>
+            </div>
 
-    <div>
-        <table class="table table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Name</th>
-                <th scope="col">Image</th>
-                <th scope="col">Price</th>
-                <th scope="col">Amount</th>
-            </tr>
-            </thead>
-            <tbody>
+            <div class="col-4">
+                
+                <div class="row">
+                    <h2>Your cart</h2>
+                </div>
 
-            <!-- Construct the rest of courses here -->
-            {% for data in productData %}
-            <tr>
-                <td scope='row'>{{ data["name"] }}</td>
-                <td><img src="{{ data["image"] }}" alt="" class="image-catalog"></td>
-                <td>{{ data["price"] }}</td>
-                <td>
-                    <form action="{{ url_for('cart') }}" method="POST" class="form-inline">
-                        <div class="form-group">
-                            <input type="hidden" name="name" value="{{data['name']}}">
-                            <input type="hidden" name="id" value="{{data['_id']}}">
-                            <input type="hidden" name="price" value="{{data['price']}}">
-                            <input type="number" class="form-control" id="inputAmount" placeholder="Enter Amount" name="amount">    
-                        </div>
-                        <button >Add to cart</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
+                <div class="row">
+                    {% if session['cart_list'] %}
+                    <table class="table">
+                        <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">Product name</th>
+                            <th scope="col">Amount</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for data in session['cart_list'] %}
+                        <tr>
+                            <td>{{ data["product"] }}</td>
+                            <td>{{ data["amount"] }}</td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                    {% endif %}
+                </div>
 
-            <!-------------------------------------->
+                <div class="row">
+                    <div class="col">
+                        <a class="btn btn-primary" role="button" href="{{ url_for('order') }}">Order now</a>
+                    </div>
+                    <div class="col">
+                        <a class="btn btn-danger" href="{{ url_for('cancel') }}" role="button">Delete cart</a>
+                    </div>
+                    
+                </div>
 
-            </tbody>
-        </table>
+            </div>
+        </div>
     </div>
-    <div>
-        <a href="{{ url_for('order') }}"> Order now !!!</a>
-    </div>
+    
 
 {% endblock %}
