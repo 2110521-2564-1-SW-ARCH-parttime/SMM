@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Order = require('../models/order')
 
+
 // Getting all
 router.get('/', async (req, res) => {
   try {
@@ -12,7 +13,18 @@ router.get('/', async (req, res) => {
   }
 })
 
+// app.get("/set_cookie", (req, res) => {
+//   var a = 'pp'
+//   res.cookie('token_cookie', a, { maxAge: oneDay / 48 });
+//   console.log('set_cookie')
+//   res.send('keep_cookie')
+// })
+
 // Getting One
+router.get('/Store_name/:store_name', getStore, (req, res) => {
+  res.json(res.order)
+})
+
 router.get('/:_id', getOrder, (req, res) => {
   res.json(res.order)
 })
@@ -29,6 +41,8 @@ router.post('/', async (req, res) => {
     res.status(400).json({ message: err.message })
   }
 })
+
+
 
 // Updating One
 // router.patch('/:id', getOrder, async (req, res) => {
@@ -70,5 +84,23 @@ async function getOrder(req, res, next) {
   res.order = order
   next()
 }
+
+async function getStore(req, res, next) {
+  let order
+  const store_name = req.params.store_name
+  try {
+    order = await Order.find({"Store_name":store_name})
+    if (order == null) {
+      return res.status(404).json({ message: 'Cannot find Store' })
+    }
+  } catch (err) {
+    return res.status(500).json({ message: err.message })
+  }
+
+  res.order = order
+  next()
+}
+
+
 
 module.exports = router

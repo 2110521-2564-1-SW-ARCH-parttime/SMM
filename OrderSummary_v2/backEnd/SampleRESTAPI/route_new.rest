@@ -1,11 +1,14 @@
-GET http://localhost:5000/orders
+GET http://localhost:5002/orders
 
 
 ###
-get http://localhost:5000/orders/61754200245ed735d4359927
+get http://localhost:5002/orders/6186792bf331865eb46717ba
 
 ###
-POST http://localhost:5000/orders
+get http://localhost:5002/orders/Store_name/mike1
+
+###
+POST http://localhost:5002/orders
 Content-Type: application/json
 
 {
