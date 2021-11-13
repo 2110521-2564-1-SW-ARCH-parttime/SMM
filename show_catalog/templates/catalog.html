@@ -25,13 +25,13 @@
                     <!-- Construct the rest of courses here -->
                     {% for data in productData %}
                     <tr>
-                        <td scope='row'>{{ data["name"] }}</td>
+                        <td scope='row'>{{ data["product_name"] }}</td>
                         <td><img src="{{ data["image"] }}" alt="" class="image-catalog"></td>
                         <td>{{ data["price"] }}</td>
                         <td>
                             <form action="{{ url_for('cart') }}" method="POST" class="form-inline">
                                 <div class="form-group">
-                                    <input type="hidden" name="name" value="{{data['name']}}">
+                                    <input type="hidden" name="name" value="{{data['product_name']}}">
                                     <input type="hidden" name="id" value="{{data['_id']}}">
                                     <input type="hidden" name="price" value="{{data['price']}}">
                                     <input type="number" class="form-control" id="inputAmount" placeholder="Enter Amount" name="amount">    

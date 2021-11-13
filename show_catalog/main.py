@@ -14,12 +14,12 @@ client = pymongo.MongoClient(connection_url)
 # Database
 Database = client.get_database('mikeshop')
 # Table
-Shop = Database.shoptest02_with_owners
-
+# Shop = Database.shoptest02_with_owners
+Shop = Database.smm_shops
   
 @app.route("/catalog/<shop>", methods=["GET"])
 def catalog(shop):
-    query = Shop.find({"owner":shop})
+    query = Shop.find({"store_name":shop})
     session['shop'] = shop
     output = []
     i = 0
@@ -70,7 +70,7 @@ def sendOrder():
     
     carts = []
     for data in session['cart_list']:
-        cart = {"product_id":data["id"], "name":data["product"], "amount":data["amount"], "price":data["price"]}
+        cart = {"product_id":data["id"], "name":data["product"], "Qty":data["amount"], "price":data["price"]}
         carts.append(cart)
     msg_dict = {
         "Store_name":session['shop']
