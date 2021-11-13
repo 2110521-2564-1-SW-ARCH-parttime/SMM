@@ -3,6 +3,7 @@
     <div :key="order._id" v-for="order in orders">
       <div class="container">
         Order {{ order._id }}
+        <ClientInfo :Client_information="order.Client_information" />
         <Products :products="order.Cart" />
          <Button @btn-click="$emit('accept-order',order._id)"
         text="Accept"
@@ -22,6 +23,7 @@
 <script>
 import Products from './Products'
 import Button from './Button'
+import ClientInfo from './ClientInfo'
 
 export default {
     name: 'Orders ',
@@ -31,6 +33,7 @@ export default {
     components: {
         Products,
         Button,
+        ClientInfo,
     }
 }
 </script>

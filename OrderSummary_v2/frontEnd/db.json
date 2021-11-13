@@ -1,110 +1,41 @@
 {
-  "tasks": [
-    {
-      "id": "1",
-      "text": "Doctors Appointment",
-      "day": "March 5th at 2:30pm",
-      "reminder": true
-    },
-    {
-      "id": "2",
-      "text": "Meeting with school",
-      "day": "March 6th at 1:30pm",
-      "reminder": false
-    },
-    {
-      "id": "3",
-      "text": "Food shopping",
-      "day": "March 7th at 2:00pm",
-      "reminder": false
-    },
-    {
-      "id": 29271,
-      "text": "dentist appoint",
-      "day": "march 10 3pm",
-      "reminder": false
-    }
-  ],
-  "products": [
-    {
-      "id": "1",
-      "text": "Thermal Fleece Jacket",
-      "price": "200",
+  "_id": {
+      "$oid": "61868ca00e2b2a88737a263e"
+  },
+  "Store_name": "mike1",
+  "Cart": [{
+      "product_id": "1",
+      "name": "book",
+      "amount": {
+          "$numberInt": "5"
+      },
+      "price": {
+          "$numberInt": "200"
+      },
       "image": "https://hplussport.com/wp-content/uploads/2016/12/slicker-jacket_LYNDA_29941.jpg",
-      "reminder": true
-    },
-    {
-      "id": "2",
-      "text": "cool Jean",
-      "price": "150",
+      "_id": {
+          "$oid": "6186792bf331865eb46717bb"
+      }
+  }, {
+      "product_id": "2",
+      "name": "table",
+      "amount": {
+          "$numberInt": "2"
+      },
+      "price": {
+          "$numberInt": "300"
+      },
       "image": "https://hplussport.com/wp-content/uploads/2016/12/unisex-grunge-jeans_LYNDA_29937.jpg",
-      "reminder": true
-    },
-    {
-      "id": "3",
-      "text": "Blue Jacket",
-      "price": "220",
-      "image": "https://hplussport.com/wp-content/uploads/2016/12/ski-coat_LYNDA_29940.jpg",
-      "reminder": false
-    },
-    {
-      "id": 18402,
-      "text": "polo",
-      "image": "https://hplussport.com/wp-content/uploads/2016/12/polo-shirt_LYNDA_29938.jpg",
-      "price": "250"
-    }
-  ],
-  "orders": [
-    {
-      "id": 1,
-      "products": [
-        {
-          "id": "1",
-          "text": "Thermal Fleece Jacket",
-          "price": "200",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/slicker-jacket_LYNDA_29941.jpg",
-          "reminder": true
-        },
-        {
-          "id": "2",
-          "text": "cool Jean",
-          "price": "150",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/unisex-grunge-jeans_LYNDA_29937.jpg",
-          "reminder": true
-        },
-        {
-          "id": "3",
-          "text": "Blue Jacket",
-          "price": "220",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/ski-coat_LYNDA_29940.jpg",
-          "reminder": false
-        },
-        {
-          "id": 18402,
-          "text": "polo",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/polo-shirt_LYNDA_29938.jpg",
-          "price": "250"
-        }
-      ]
-    },
-    {
-      "id": 2,
-      "products": [
-        {
-          "id": "1",
-          "text": "Thermal Fleece Jacket",
-          "price": "200",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/slicker-jacket_LYNDA_29941.jpg",
-          "reminder": true
-        },
-        {
-          "id": "2",
-          "text": "cool Jean",
-          "price": "150",
-          "image": "https://hplussport.com/wp-content/uploads/2016/12/unisex-grunge-jeans_LYNDA_29937.jpg",
-          "reminder": true
-        }
-      ]
-    }
-  ]
+      "_id": {
+          "$oid": "6186792bf331865eb46717bc"
+      }
+  }],
+  "Client_information": {
+      "name": "anapom",
+      "telephone": "0865278961",
+      "address": "MySweetHome"
+  },
+  "__v": {
+      "$numberInt": "0"
+  }
 }

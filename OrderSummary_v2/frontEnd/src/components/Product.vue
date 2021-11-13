@@ -5,7 +5,7 @@
         </h3>    
         <p> product name : {{ product.name}}</p>
         <p> price : {{ product.price}}</p>
-        <p> amount : {{ product.amount}}</p>
+        <p> amount : {{ product.Qty}}</p>
         <!-- <img :src=product.image class="img-circle" alt="Services" />  -->
         
      </div>    

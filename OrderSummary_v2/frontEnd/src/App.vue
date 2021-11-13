@@ -1,26 +1,10 @@
   <template>
   <div class="container">
-    <!-- <Orders
-      title="Order Summary"
-    /> -->
+  
     <Header
-      @toggle-add-task="toggleAddTask"
+      @back_to_previous_page="backToPreviousPage"
       title="Order summary"
-      :showAddTask="showAddTask"
     />
-    <!-- <div v-if="showAddTask">
-      <AddTask @add-task="addTask" />
-    </div> -->
-
-    <!-- <Tasks
-      @toggle-reminder="toggleReminder"
-      @delete-task="deleteTask"
-      :tasks="tasks"
-    /> -->
-
-    <!-- <Products
-    :products="products"
-    /> -->
 
     <Orders
     @accept-order='acceptOrder'
@@ -32,34 +16,26 @@
 </template>
 
 <script>
-// import Orders from "./components/Orders"
 import Header from "./components/Header";
-// import Tasks from "./components/Tasks";
-// import AddTask from "./components/AddTask";
-// import Products from './components/Products'
 import Orders from './components/Orders'
 
 export default {
   name: "App",
   components: {
-    // Orders,
     Header,
-    // Tasks,
-    // AddTask,
-    // Products,
     Orders
   },
   data() {
     return {
-      tasks: [],
-      showAddTask: false,
-      products: [],
       orders: [],
     };
   },
+  
   methods: {
-    toggleAddTask() {
-      this.showAddTask = !this.showAddTask;
+    backToPreviousPage(){
+      console.log('pom be back')
+      console.log("this router", this.$route.params.name)
+      this.$router.push('http://localhost:5048/') 
     },
     async acceptOrder(id){
       console.log(id)
@@ -76,80 +52,23 @@ export default {
       }
       location.reload(true);
     },
-    async addTask(task) {
-      const res = await fetch("api/tasks", {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(task),
-      });
-      const data = await res.json();
-
-      this.tasks = [...this.tasks, data];
-    },
-    async deleteTask(id) {
-      if (confirm("Are you sure?")) {
-        const res = await fetch(`api/tasks/${id}`, {
-          method: "DELETE",
-        });
-
-        res.status === 200
-          ? (this.tasks = this.tasks.filter((task) => task.id !== id ))
-          : alert("Error deleteing task");
-      }
-    },
-    async toggleReminder(id) {
-      const taskToToggle = await this.fetchTask(id);
-      const updTask = { ...taskToToggle, reminder: !taskToToggle.reminder };
-
-      const res = await fetch(`api/tasks/${id}`, {
-        method: "PUT",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify(updTask),
-      });
-
-      const data = await res.json();
-
-      this.tasks = this.tasks.map((task) =>
-        task.id === id ? { ...task, reminder: data.reminder } : task
-      );
-    },
-    async fetchTasks() {
-      const res = await fetch("api/tasks");
-
-      const data = await res.json();
-
-      return data;
-    },
-    async fetchTask(id) {
-      const res = await fetch(`api/tasks/${id}`);
-
-      const data = await res.json();
-
-      return data;
-    },
-    async fetchProducts(){
-      const res = await fetch("api/products")
-
-      const data = await res.json()
-
-      return data;
-    },
-    async fetchOrder(){
-      const res = await fetch("api/orders")
+    async fetchOrder(store){
+      // const res = await fetch('api/orders/')
+      const res = await fetch(`api/orders/Store_name/${store}`)
 
       const data = await res.json()
 
       return data;
     }
   },
+  watch : {
+     async '$route' (to) {
+     this.orders = await this.fetchOrder(to.params.name)
+    }
+  },
   async created() {
-    // this.tasks = await this.fetchTasks();
-    // this.products = await this.fetchProducts();
-    this.orders = await this.fetchOrder()
+
+    this.orders = await this.fetchOrder(this.$route.params.name)
   },
 };
 </script>
