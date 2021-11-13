@@ -1,14 +1,20 @@
 <template>
     <header>
         <h1>{{ title }}</h1>
+        <a class="btn btn-success btn-block" href="http://localhost:5048/" role="button">back</a>
+        <!-- <Button @btn-click="$emit('back_to_previous_page')"
+        text="Back"
+        color ='blue' 
+        /> -->
         <!-- <Button @btn-click="$emit('toggle-add-task')"
         :text="showAddTask ? 'Close' : 'Add Task'"
         :color ="showAddTask ? 'red' : 'green'" /> -->
     </header>
+
 </template>
 
 <script>
-// import Button from './Button'
+
 
 export default {
     name: 'Header',
@@ -20,9 +26,9 @@ export default {
         showAddTask: Boolean
     },
     
-    // components: {
-    //     Button
-    // }
+    components: {
+        
+    }
 }
 </script>
 
